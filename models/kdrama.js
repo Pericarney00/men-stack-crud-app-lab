@@ -1,10 +1,11 @@
 const mongoose = require("mongoose")
 
 const kdramaSchema = new mongoose.Schema({
-  name: String,
-  year: Number,
-  genre: String,
-  watched: Boolean,
+  name: {type: String, required:true},
+  year: {type:Number, required:true},
+  genre: {type:String, required:true},
+  watched: {type:Boolean, required:true},
+  image: {type:String, required:true},
 })
 
 const Kdrama = mongoose.model("Kdrama", kdramaSchema)

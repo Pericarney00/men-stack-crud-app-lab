@@ -19,7 +19,9 @@ app.get("/", (req, res) => {
   res.render("index.ejs")
 })
 
-
+app.get("/kdramas/new", (req, res) => {
+  res.render("kdramas/new.ejs")
+})
 
 
 
