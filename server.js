@@ -15,11 +15,11 @@ const Kdrama = require("./models/kdrama.js")
 
 
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   res.render("index.ejs")
 })
 
-app.get("/kdramas/new", (req, res) => {
+app.get("/kdramas/new", async (req, res) => {
   res.render("kdramas/new.ejs")
 })
 

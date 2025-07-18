@@ -5,8 +5,8 @@ const kdramaSchema = new mongoose.Schema({
   year: {type:Number, required:true},
   genre: {type:String, required:true},
   watched: {type:Boolean, required:true},
-  image: {type:String, required:true},
-})
+  image: { type: String } ,
+}) 
 
 const Kdrama = mongoose.model("Kdrama", kdramaSchema)
 

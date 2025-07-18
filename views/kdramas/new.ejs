@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Create New Kdrama Watchlist</h1>
+    <form action="/kdramas" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name"/>
+
+      <label for="year"></label>
+      <input type="number" name="year" id="year" />
+
+      <label for="genre"></label>
+      <input type="text" name="genre" id="genre"/>
+
+      <label for="watched"></label>
+      <input type="checkbox" name="watched" id="watched"/>
+
+      <label for="image"></label>
+      <input type="text" name="image" id="image"/>
+
+      <button type="submit">Add Kdrama</button>
+    </form>
+</body>
+</html>
