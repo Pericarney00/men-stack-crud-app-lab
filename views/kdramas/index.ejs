@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kdrama Index</title>
+  </head>
+  <body>
+    <h1>All Kdramas</h1>
+    <ul>
+    <% kdramas.forEach(kdrama => { %>
+      <li><%= kdrama.name %></li>
+    <% }); %>
+  </ul>
+
+  <a href="/kdramas/new">Add to your watchlist</a>
+  </body>
+</html>

@@ -3,6 +3,8 @@ dotenv.config()
 
 const express = require("express")
 const mongoose = require("mongoose")
+const methodOverride = require("method-override")
+const morgan = require("morgan")
 
 const app = express()
 
@@ -17,16 +19,23 @@ mongoose.connection.on("connected", () => {
 
 const Kdrama = require("./models/kdrama.js")
 
+app.use(express.urlencoded({extended: false}))
+app.use(methodOverride("_method"));
+app.use(morgan("dev"));
+
+
 
 //GET (READ) - Landing Page
 app.get("/", async (req, res) => {
   res.render("index.ejs")
 })
+
 //Get (READ) -new form to add new dramas
 app.get("/kdramas/new", async (req, res) => {
   res.render("kdramas/new.ejs")
 })
 
+//POST (CREATE) - create new kdrama
 app.post("/kdramas", async (req, res) => {
   if (req.body.watched === "on") {
     req.body.watched = true
@@ -34,10 +43,15 @@ app.post("/kdramas", async (req, res) => {
     req.body.watched = false
   }
   await Kdrama.create(req.body);
-  res.redirect("/kdramas/new")
+  res.redirect("/kdramas/")
 });
 
 //1.Get(READ) -index /kdramas :display all kdramas
+app.get("/kdramas", async (req, res) => {
+  const allKdramas = await Kdrama.find();
+  res.render("kdramas/index.ejs", {kdramas: allKdramas})
+})
+
 //2.POST(create) -create /kdramas/new :submitting data to the database
 //3.GET (READ) -show /kdramas/:kdramaId :display a specific kdrama
 //4. Get (READ) -edit /kdramas/:kdramaId/edit  :edit specific kdrama data (ex. did you watch it,yes, click the checkbox)
