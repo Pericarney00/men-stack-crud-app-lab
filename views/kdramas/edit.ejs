@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <a href="/kdramas">Back to kdramas</a>
+</head>
+<body>
+  <h1>Create New Kdrama Watchlist</h1>
+    <form action="/kdramas/<%= kdrama._id%>?_method=PUT" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" value="<%= kdrama.name %>"/>
+
+      <label for="year">Year:</label>
+      <input type="number" name="year" id="year"value="<%= kdrama.year %>" />
+
+      <label for="genre">Genre:</label>
+      <input type="text" name="genre" id="genre"value="<%= kdrama.genre %>"/>
+
+      <label for="watched">Watched:</label>
+      <input type="checkbox" name="watched" id="watched" 
+        <% if (kdrama.watched) { %>
+          checked
+        <% } %>
+      />
+
+      <label for="image">Image:</label>
+      <input type="text" name="image" id="image" value="<%= kdrama.image %>"/>
+
+      <button type="submit">Update Kdrama</button>
+    </form>
+</body>
+</html>

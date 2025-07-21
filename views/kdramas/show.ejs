@@ -13,6 +13,11 @@
       <p>You have NOT watched this drama</p>
     <% } %>
 
+    <form action="/kdramas/<%=kdrama._id %>?_method=DELETE" method="POST">
+      <button type="submit">Delete <%= kdrama.name %></button>
+    </form>
+
+      <a href="/kdramas/<%= kdrama._id %>/edit"> Edit <%= kdrama.name %></a>
       <a href="/kdramas">Back to list</a>
   </body>
 </html>

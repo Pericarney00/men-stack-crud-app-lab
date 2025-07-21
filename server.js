@@ -58,9 +58,30 @@ app.get("/kdramas/:kdramaId", async (req, res) => {
   const foundKdrama = await Kdrama.findById(req.params.kdramaId)
   res.render("kdramas/show.ejs", {kdrama: foundKdrama})
 })
-//4. Get (READ) -edit /kdramas/:kdramaId/edit  :edit specific kdrama data (ex. did you watch it,yes, click the checkbox)
-//5. PUT (UPDATE) -update /kdramas/:kdramaId :submitted edit data
 //6. DELETE (DELETE) -delete /kdramas/:kdramaId :removing kdrama from the database
+app.delete("/kdramas/:kdramaId", async (req, res) => {
+  await Kdrama.findByIdAndDelete(req.params.kdramaId);
+  res.redirect("/kdramas")
+})
+
+//4. Get (READ) -edit /kdramas/:kdramaId/edit  :edit specific kdrama data (ex. did you watch it,yes, click the checkbox)
+app.get("/kdramas/:kdramaId/edit", async (req, res) => {
+  const foundKdrama = await Kdrama.findById(req.params.kdramaId)
+  res.render("kdramas/edit.ejs", {kdrama: foundKdrama})
+})
+//5. PUT (UPDATE) -update /kdramas/:kdramaId :submitted edit data
+app.put("/kdramas/:kdramaId", async (req, res) => {
+  if (req.body.watched === "on") {
+    req.body.watched = true;
+  } else {
+    req.body.watched = false;
+  }
+  await Kdrama.findByIdAndUpdate(req.params.kdramaId, req.body)
+  res.redirect(`/kdramas/${req.params.kdramaId}`)
+});
+
+
+
 app.listen(3000, () => {
   console.log("listening on port 300")
 })
