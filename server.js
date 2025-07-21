@@ -35,7 +35,7 @@ app.get("/kdramas/new", async (req, res) => {
   res.render("kdramas/new.ejs")
 })
 
-//POST (CREATE) - create new kdrama
+//2.POST(create) -create /kdramas/new :submitting data to the database
 app.post("/kdramas", async (req, res) => {
   if (req.body.watched === "on") {
     req.body.watched = true
@@ -52,8 +52,12 @@ app.get("/kdramas", async (req, res) => {
   res.render("kdramas/index.ejs", {kdramas: allKdramas})
 })
 
-//2.POST(create) -create /kdramas/new :submitting data to the database
+
 //3.GET (READ) -show /kdramas/:kdramaId :display a specific kdrama
+app.get("/kdramas/:kdramaId", async (req, res) => {
+  const foundKdrama = await Kdrama.findById(req.params.kdramaId)
+  res.render("kdramas/show.ejs", {kdrama: foundKdrama})
+})
 //4. Get (READ) -edit /kdramas/:kdramaId/edit  :edit specific kdrama data (ex. did you watch it,yes, click the checkbox)
 //5. PUT (UPDATE) -update /kdramas/:kdramaId :submitted edit data
 //6. DELETE (DELETE) -delete /kdramas/:kdramaId :removing kdrama from the database

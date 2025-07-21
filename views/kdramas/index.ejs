@@ -9,7 +9,9 @@
     <h1>All Kdramas</h1>
     <ul>
     <% kdramas.forEach(kdrama => { %>
-      <li><%= kdrama.name %></li>
+      <li>
+        <a href="/kdramas/<%=kdrama._id%>"><%= kdrama.name %></a>
+      </li>
     <% }); %>
   </ul>
 
