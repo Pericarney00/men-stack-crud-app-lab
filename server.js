@@ -30,6 +30,12 @@ app.get("/", async (req, res) => {
   res.render("index.ejs")
 })
 
+//1.Get(READ) -index /kdramas :display all kdramas
+app.get("/kdramas", async (req, res) => {
+  const allKdramas = await Kdrama.find();
+  res.render("kdramas/index.ejs", {kdramas: allKdramas})
+})
+
 //Get (READ) -new form to add new dramas
 app.get("/kdramas/new", async (req, res) => {
   res.render("kdramas/new.ejs")
@@ -46,23 +52,13 @@ app.post("/kdramas", async (req, res) => {
   res.redirect("/kdramas/")
 });
 
-//1.Get(READ) -index /kdramas :display all kdramas
-app.get("/kdramas", async (req, res) => {
-  const allKdramas = await Kdrama.find();
-  res.render("kdramas/index.ejs", {kdramas: allKdramas})
-})
-
 
 //3.GET (READ) -show /kdramas/:kdramaId :display a specific kdrama
 app.get("/kdramas/:kdramaId", async (req, res) => {
   const foundKdrama = await Kdrama.findById(req.params.kdramaId)
   res.render("kdramas/show.ejs", {kdrama: foundKdrama})
 })
-//6. DELETE (DELETE) -delete /kdramas/:kdramaId :removing kdrama from the database
-app.delete("/kdramas/:kdramaId", async (req, res) => {
-  await Kdrama.findByIdAndDelete(req.params.kdramaId);
-  res.redirect("/kdramas")
-})
+
 
 //4. Get (READ) -edit /kdramas/:kdramaId/edit  :edit specific kdrama data (ex. did you watch it,yes, click the checkbox)
 app.get("/kdramas/:kdramaId/edit", async (req, res) => {
@@ -80,7 +76,11 @@ app.put("/kdramas/:kdramaId", async (req, res) => {
   res.redirect(`/kdramas/${req.params.kdramaId}`)
 });
 
-
+//6. DELETE (DELETE) -delete /kdramas/:kdramaId :removing kdrama from the database
+app.delete("/kdramas/:kdramaId", async (req, res) => {
+  await Kdrama.findByIdAndDelete(req.params.kdramaId);
+  res.redirect("/kdramas")
+})
 
 app.listen(3000, () => {
   console.log("listening on port 300")

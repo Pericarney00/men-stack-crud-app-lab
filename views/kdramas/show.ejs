@@ -12,7 +12,12 @@
     <% } else { %>
       <p>You have NOT watched this drama</p>
     <% } %>
-
+    <h2>show details</h2>
+    <ul>
+      <li> This show was made in: <%= kdrama.year %></li>
+      <li> Genre:<%= kdrama.genre %></li>
+      
+    </ul>
     <form action="/kdramas/<%=kdrama._id %>?_method=DELETE" method="POST">
       <button type="submit">Delete <%= kdrama.name %></button>
     </form>
